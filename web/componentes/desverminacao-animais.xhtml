@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">
+        Desverminação
+    </ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <div align="center">
+            <h:form id="desver">
+
+                <!-- MENSAGENS -->
+                <p:messages id="msgs" showDetail="true"/>
+
+                <p:fieldset legend="Desverminação">
+
+                    <!-- PESQUISAR ANIMAIS -->
+                    <div align="right">
+                        <h:outputLink value="javascript:void(0)" onclick="dlg.show()">Pesquisar</h:outputLink>  
+                    </div>
+
+
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Desverminar o ANIMAL:"/>
+                        <h:outputText value="#{desvermificacaoMB.desvermificacaoSelecionado.animal.nome.toUpperCase()}" 
+                                      style="color: #D20005; font-size: 14px"/>
+                    </h:panelGrid>
+
+                    <br/>
+
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome do Principio ativo:"/>
+                            <p:inputText value="#{desvermificacaoMB.desvermificacaoSelecionado.nome}"
+                                         required="true"
+                                         requiredMessage="O nome da desverminação é OBRIGATÓRIO"
+                                         size="60"/>
+                            <h:outputText value="Principio Ativo:(%)"/>
+                            <p:inputText value="#{desvermificacaoMB.desvermificacaoSelecionado.principioAtivo}"
+                                         required="true"
+                                         requiredMessage="O % principio ativo é OBRIGATÓRIO"/>
+                            <h:outputText value="Data de Desverminação"/>
+                            <p:calendar value="#{desvermificacaoMB.desvermificacaoSelecionado.dataDesvermificacao}"/>
+
+                            <h:outputText value="Validade em meses (Ex.: 09)"/>
+                            <p:inputMask value="#{desvermificacaoMB.validadeDes}" mask="99"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel>
+                        <!-- SALVAR -->
+                        <p:commandButton value="Salvar" actionListener="#{desvermificacaoMB.salvar()}" style="width: 100px; height: 50px; background-color: skyblue"
+                                         update="listaDesverminacao" 
+                                         ajax="false"
+                                         oncomplete="#{desvermificacaoMB.listaDeserveminacaoPorAnimal}"/>
+
+                    </p:panel>
+
+
+
+                </p:fieldset>
+            </h:form>
+
+            <br/>
+
+            <!-- LISTA DE DESVERMINACAO  POR ANIMAL --> 
+            <div>
+                <h:form id="listaDesverminacao" >
+                    <p:dataTable value="#{desvermificacaoMB.listaDeserveminacaoPorAnimal}" 
+                                 var="desvAni"
+                                 resizableColumns="true">
+
+                        <f:facet name="header">
+                            Animal Desverminação
+                        </f:facet>
+
+                        <p:column headerText="Nº Controle">
+            #{desvAni.animal.numeroControle}
+        </p:column>
+
+        <p:column headerText="Nome Animal">
+            #{desvAni.animal.nome}
+        </p:column>
+
+        <p:column headerText="Raça">
+            #{desvAni.animal.raca}
+        </p:column>
+
+        <p:column headerText="Validade">
+            #{desvAni.animal.categoria}
+        </p:column>
+
+        <p:column headerText="Nome Desverminação">
+            #{desvAni.nome}
+        </p:column>
+
+        <p:column headerText="Principio Ativo">
+            #{desvAni.principioAtivo}
+        </p:column>
+
+        <p:column headerText="Data Desver.">
+            #{desvAni.dataDesvermificacao}
+        </p:column>
+
+        <p:column headerText="Validade">
+            #{desvAni.validadeDes}
+        </p:column>
+    </p:dataTable>
+</h:form>
+</div>
+
+            <!-- PESQUISAR ANIMAL DESVERMINACAO-->
+            <h:form>
+
+                <p:dialog id="pesquisar" widgetVar="dlg" header="Pesquisar Animais Cadastradas" width="600" height="400"  
+                          resizable="true" showEffect="explode" hideEffect="explode">
+
+
+                    <p:dataTable value="#{animailMB.listaAnimais}" var="animal"
+                                 selectionMode="single"
+                                 selection="#{desvermificacaoMB.desvermificacaoSelecionado.animal}"
+                                 rowKey="#{animal.nome}"
+                                 >
+
+                        <p:ajax event="rowSelect" update="desver,listaDesverminacao" oncomplete="dlg.hide()" /> 
+
+                        <p:column headerText="Nº Controle" sortBy="#{animal.numeroControle}" filterBy="#{animal.numeroControle}">
+                            #{animal.numeroControle}
+                        </p:column>
+
+                        <p:column headerText="SISBOV" sortBy="#{animal.sisbov}" filterBy="#{animal.sisbov}">
+                            #{animal.sisbov}
+                        </p:column>
+
+                        <p:column headerText="Nome" sortBy="#{animal.nome}" filterBy="#{animal.nome}">
+                            #{animal.nome}
+                        </p:column>
+
+                        <p:column headerText="Raça" sortBy="#{animal.raca}" filterBy="#{animal.raca}">
+                            #{animal.raca}
+                        </p:column>
+
+                    </p:dataTable>                  
+                </p:dialog>
+
+
+            </h:form>
+
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>
+

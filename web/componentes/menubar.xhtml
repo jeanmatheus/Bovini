@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui">
+
+    <p:menubar>  
+
+        <p:menuitem value="Meu Sistema" url="/xhtml/componentes/bem-vindo.xhtml" icon="ui-icon ui-icon-home"/>     
+
+        <p:menuitem value="Minha Propriedade" url="/xhtml/componentes/minha-propriedade.xhtml" icon="ui-icon ui-icon-info"/>            
+
+        <p:submenu label="Cadastro" icon="ui-icon ui-icon-plusthick">  
+            <p:menuitem value="Propriedade" url="/xhtml/componentes/cadastro-propriedade.xhtml"/>  
+            <p:menuitem value="Animal" url="/xhtml/componentes/cadastro-animais.xhtml"/>
+        </p:submenu>  
+
+        <p:submenu label="Manejo e Sanidade" icon="ui-icon ui-icon-gear">  
+            <p:menuitem value="Vacinas" url="/xhtml/componentes/vacinas-animais.xhtml"/> 
+            <p:menuitem value="Controle Reprodutivo" url="/xhtml/componentes/controle-reprodutivo.xhtml"/>  
+            <p:menuitem value="Desverminação" url="/xhtml/componentes/desverminacao-animais.xhtml"/>  
+        </p:submenu>  
+
+        <p:submenu label="Relatórios" icon="ui-icon ui-icon-document">  
+            <p:submenu label="Animais" icon="ui-icon ui-icon-refresh">  
+                <p:submenu label="Por Vacina">
+                    <p:menuitem value="Aplicadas"/>  
+                    <p:menuitem value="A serem Aplicadas"/> 
+                    <p:menuitem value="Atrazadas"/>
+                    <p:menuitem value="Tipo de Vacina"/> 
+                </p:submenu>
+            </p:submenu>            
+        </p:submenu>  
+
+        <p:submenu label="Ajuda" icon="ui-icon ui-icon-help">
+            <p:submenu label="Sobre" icon="ui-icon ui-icon-search">  
+                <p:submenu label="Desenvovedores">  
+                    <p:menuitem value="Jean Matheus" url="http://about.me/jeanmatheus" target="_blanck" />
+                    <p:menuitem value="Cristovão" url="http://twitter.com/Alemao_Schvaab" target="_blanck" />
+                </p:submenu>  
+            </p:submenu>  
+            <p:menuitem value="Dicas" url="/xhtml/componentes/dicas-software.xhtml"/>
+            <p:menuitem value="Jelastic" url="http://jelastic.com/why" target="_blanck"/>
+            <p:menuitem value="Versão" url="/xhtml/componentes/versao.xhtml"/>
+        </p:submenu>  
+
+        <!--
+        <p:menuitem value="Mandar Erro ou Sugestão" url="/xhtml/componentes/manda-email.xhtml" 
+                    icon="ui-icon ui-icon-mail-closed"/>
+        -->
+
+    </p:menubar>  
+
+
+
+</ui:fragment>

@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulopagina">
+        Bonivi - Cadastro Animais
+    </ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <div align="center">
+            <h:form id="formAnimalCad">
+
+                <!-- MENSAGENS -->
+                <p:messages id="msgAni" showDetail="true"/>
+
+                <p:panel id="panelCadAnimais" header="Cadastro de Animais" style="width: 700px;text-align: left">
+
+                    <div align="center">
+
+                        <h:panelGrid columns="2" cellspacing="3">
+                            <h:outputText value="Propriedade:"/>
+                            <p:selectOneMenu value="#{animailMB.animalSelecionado.propriedade}" 
+                                             converter="PropriedadeConverter"
+                                             style="width: 200px">
+                                <f:selectItems value="#{propriedadeMB.listaPropri}"
+                                               var="pro"
+                                               itemLabel="#{pro.nome}"
+                                               itemValue="#{pro}">
+                                </f:selectItems>
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Número SISBOV: *"/>
+                            <p:inputText id="sisbov"
+                                         value="#{animailMB.animalSelecionado.sisbov}" 
+                                         required="true"
+                                         requiredMessage="O campo número do SISBOV é OBRIGATÓRIO."
+                                         size="30"/>
+
+                            <h:outputText value="Nome Fantasia: "/>
+                            <p:inputText id="fantasia" 
+                                         value="#{animailMB.animalSelecionado.nome}" 
+                                         required="false" 
+                                         size="30"/>
+
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2">
+
+                            <h:outputText value="Nome da Mãe: *"/>
+                            <p:inputText value="#{animailMB.animalSelecionado.nomeMae}" size="30"/>
+
+                            <h:outputText value="Nome do Pai: *"/>
+                            <p:inputText value="#{animailMB.animalSelecionado.nomePai}" size="30"/>
+
+                            <h:outputText value="Número Interno: *"/>
+                            <p:inputText value="#{animailMB.animalSelecionado.numeroControle}" 
+                                         requiredMessage="Número é requirido."
+                                         size="30"/>
+
+                            <h:outputText value = "Data Nascimento: *"/>
+                            <p:calendar value="#{animailMB.animalSelecionado.dataNascimento}" 
+                                        id="dataNasc"
+                                        required="true"
+                                        requiredMessage="O campo data de nascimento é OBRIGATÓRIO."
+                                        effect="explode"
+                                        size="30"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="6">
+                            <h:outputText value="Sexo: *"/>
+                            <p:selectOneMenu id="sexo" value="#{animailMB.animalSelecionado.sexo}" 
+                                             style="width: 100px" 
+                                             required="true"
+                                             requiredMessage="O campo sexo é OBRIGATÓRIO.">   
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="Macho" itemValue="M" />  
+                                <f:selectItem itemLabel="Femêa" itemValue="F" />  
+                            </p:selectOneMenu> 
+
+
+                            <!-- CATEGORIA -->
+                            <h:outputText value="Categoria"/>
+                            <p:selectOneMenu id="categoria" value="#{animailMB.animalSelecionado.categoria}" 
+                                             style="width: 100px" 
+                                             required="true" 
+                                             requiredMessage="O campo categoria é OBRIGATÓRIO.">   
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="Bezerro" itemValue="Bezerro" />  
+                                <f:selectItem itemLabel="Novilha" itemValue="Novilha"/>
+                                <f:selectItem itemLabel="Vaca" itemValue="Vaca" />
+                            </p:selectOneMenu> 
+
+                            <!-- RAÇA -->
+                            <h:outputText value="Raça"/>
+                            <p:selectOneMenu id="raca" value="#{animailMB.animalSelecionado.raca}" 
+                                             style="width: 100px" 
+                                             required="true"
+                                             requiredMessage="O campo raça é OBRIGATÓRIO">
+
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="Jersey" itemValue="Jersey" />  
+                                <f:selectItem itemLabel="Holandesa" itemValue="Holandesa" />
+                                <f:selectItem itemLabel="Gir-Leiteiro" itemValue="Gir-Leiteiro" />
+
+                            </p:selectOneMenu> 
+
+                            <!-- STATUS -->
+                            <h:outputText value="Status"/>
+                            <p:selectOneMenu id="status" value="#{animailMB.animalSelecionado.status}" 
+                                             style="width: 100px" 
+                                             required="true"
+                                             requiredMessage="O campo Status é OBRIGATÓRIO">   
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="Prenha" itemValue="Prenha" />  
+                                <f:selectItem itemLabel="Vazia" itemValue="Vazia" />
+                                <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+
+                        <br/>
+
+                        <p:panel style="text-align: right">
+                            <div align="center">
+                                <h:panelGrid columns="5">
+                                    <p:commandButton value="Salvar" action="#{animailMB.salvar()}" style="width: 100px; height: 50px; background-color: skyblue"
+                                                     update="formAnimalCad,listaAnimais,remoAni" 
+                                                     oncomplete="#{animailMB.listaAnimais}"
+                                                     ajax="false">
+                                    </p:commandButton>
+
+                                    <p:commandButton value="Novo" action="#{animailMB.novo()}" style="width: 100px; height: 50px; background-color: skyblue"
+                                                     update="formAnimalCad,listaAnimais,remoAni" 
+                                                     ajax="false"
+                                                     immediate="true">
+                                    </p:commandButton>
+                                </h:panelGrid>
+                            </div>
+                        </p:panel>
+
+                    </div>
+                    
+                </p:panel>
+            </h:form>
+
+            <br></br>
+            <br></br>
+
+
+            <div id="listaAnimais">
+                <!-- lista de animais com o poder de editar e excluir -->
+                <h:form>
+                    <p:dataTable var="animal" value="#{animailMB.listaAnimais}" id="animalList" rowKey="#{animal.id}"
+                                 selectionMode="single" selection="#{animailMB.animalSelecionado}" 
+                                 paginator="true" rows="10">  
+
+                        <!-- pega animal da linha clicada -->
+                        <p:ajax event="rowSelect" update="formAnimalCad,remoAni"  />  
+
+                        <f:facet name="header">  
+                            Animais cadastrados - Você pode EDITALOS e tambem EXCLUILOS atraves da TABELA 
+                        </f:facet>  
+
+                        <p:column headerText="SISBOV" style="width:55px" sortBy="#{animal.sisbov}" filterBy="#{animal.sisbov}">  
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{animal.sisbov}" />  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{animal.sisbov}" style="width:100%"/>  
+                                </f:facet>  
+                            </p:cellEditor>  
+                        </p:column>  
+
+                        <p:column headerText="Nome" style="width:75px" sortBy="#{animal.nome}" filterBy="#{animal.nome}">  
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{animal.nome}" />  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{animal.nome}" style="width:100%" label="Nome"/>  
+                                </f:facet>  
+                            </p:cellEditor>  
+                        </p:column>  
+
+                        <p:column headerText="Categoria" style="width:75px" sortBy="#{animal.categoria}" filterBy="#{animal.categoria}">  
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{animal.categoria}" />  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:selectOneMenu id="categoria" 
+                                                     value="#{animal.categoria}" 
+                                                     style="width: 100px" 
+                                                     required="true" 
+                                                     requiredMessage="O campo categoria é OBRIGATÓRIO."
+                                                     effect="explode">   
+                                        <f:selectItem itemLabel="Selecione"/>
+                                        <f:selectItem itemLabel="Bezerro" itemValue="Bezerro" />  
+                                        <f:selectItem itemLabel="Novilha" itemValue="Novilha"/>
+                                        <f:selectItem itemLabel="Vaca" itemValue="Vaca" />
+                                    </p:selectOneMenu> 
+                                </f:facet>  
+                            </p:cellEditor>  
+                        </p:column>  
+
+                        <p:column headerText="Nº Controle" style="width:125px" sortBy="#{animal.numeroControle}" filterBy="#{animal.numeroControle}">  
+                            <h:outputText value="#{animal.numeroControle}"/>
+                        </p:column>  
+
+                        <p:column headerText="EDITAR" style="text-align: center">  
+                            <p:rowEditor/>
+                        </p:column>
+
+                        <p:column headerText="Exclusão" style="text-align: center">  
+                            <p:commandButton value="Excluir?" onclick="confirmation.show()" 
+                                             type="button" 
+                                             immediate="true"  
+                                             ajax="false"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </div>
+
+            <!-- REMOCAO -->
+            <h:form id="remoAni">
+                <div>
+                    <p:confirmDialog message="Deseja EXCLUIR este Animal: ID:  #{animailMB.animalSelecionado.id}?"  
+                                     header="Exclusão" severity="alert" widgetVar="confirmation" visible="false">  
+
+                        <p:commandButton value="SIM" update="listaAnimais" oncomplete="confirmation.hide()"  
+                                         action="#{animailMB.remover()}" ajax="false"/>  
+
+                        <p:commandButton value="NÃO" onclick="confirmation.hide()" type="button" />   
+
+                    </p:confirmDialog>
+                </div>
+
+            </h:form>
+        </div>
+
+
+
+        <br></br>
+
+    </ui:define>
+
+</ui:composition>
+

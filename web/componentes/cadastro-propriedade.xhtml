@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">
+        Nova Propriedade
+    </ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="formCadPropriedade" styleClass="center_content">
+            <div align="right">
+                <h:outputLink value="javascript:void(0)" onclick="dlg.show()">Pesquisar</h:outputLink>  
+            </div>
+        </h:form>
+
+        <h:form id="cadProp">
+
+            <p:messages id="msgsCadProp" showDetail="true"/>
+
+            <p:fieldset legend="Nova Propriedade">
+
+                <!-- CADASTRO -->
+                <p:panel>
+                    <h:panelGrid columns="2" cellspacing="5">
+                        <h:outputText value="Nome"/>
+                        <p:inputText value="#{propriedadeMB.propriedadeSelecionado.nome}"
+                                     required="true"
+                                     requiredMessage="O nome da propriedade é OBRIGATORIO"
+                                     size="70"/>
+
+                        <h:outputText value="Nome Fantasia"/>
+                        <p:inputText value="#{propriedadeMB.propriedadeSelecionado.nomeFantasia}"
+                                     size="70"/>
+
+                        <h:outputText value="Bloco Produtor"/>
+                        <p:inputText value="#{propriedadeMB.propriedadeSelecionado.blocoProdutor}"
+                                     required="true"
+                                     requiredMessage="O nome da Bloco Produtor é OBRIGATORIO"/>
+
+                        <h:outputText value="Complemento (RUA):"/>
+                        <p:inputText value="#{propriedadeMB.propriedadeSelecionado.complemento}" size="70"/>
+                        
+                    </h:panelGrid>
+
+                    <!-- endereco -->
+                    <h:panelGrid columns="4">
+                        <h:outputText value="Estado:"/>
+                        <p:selectOneMenu value="#{propriedadeMB.propriedadeSelecionado.estadoAux}" style="width: 200px">
+                            <f:selectItems value="#{ufMB.listaUfs}" var="uf" 
+                                           itemLabel="#{uf.nome}"
+                                           itemValue="#{uf.nome}"/>
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Cidade:"/>
+                        <p:selectOneMenu value="#{propriedadeMB.propriedadeSelecionado.cidadeAux}" style="width: 200px">
+                            <f:selectItems value="#{cidadeMB.listaCidade}" var="cid" 
+                                           itemLabel="#{cid.nome}"
+                                           itemValue="#{cid.nome}"/>
+                        </p:selectOneMenu>
+
+                    </h:panelGrid>
+
+                </p:panel>
+
+                <br/>
+
+                <!-- ACOES -->
+                <p:panel style="text-align: right">
+                    <div align="center">
+                        <h:panelGrid columns="5">
+                            <p:commandButton value="Salvar" action="#{propriedadeMB.salvar()}" style="width: 100px; height: 50px; background-color: skyblue"
+                                             update="cadProp,listaAnimais,remoAni"
+                                             ajax="false"/>
+
+
+                            <p:commandButton value="Novo" action="#{propriedadeMB.novo()}" style="width: 100px; height: 50px; background-color: skyblue"
+                                             update="cadProp,listaAnimais,remoAni"
+                                             ajax="false" immediate="true">
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </div>
+                </p:panel>
+
+            </p:fieldset>
+        </h:form>
+
+        <!-- PESQUISAR -->
+        <h:form>
+
+            <p:dialog id="pesquisar" widgetVar="dlg" header="Pesquisar Propriedades Cadastradas" width="600" height="400"  
+                      resizable="true" showEffect="explode" hideEffect="explode">
+
+
+                <p:dataTable value="#{propriedadeMB.listaPropri}" var="pro"
+                             selectionMode="single"
+                             selection="#{propriedadeMB.propriedadeSelecionado}"
+                             rowKey="#{pro.nome}"
+                             rendered="#{propriedadeMB.listaPropri.size() != null}"
+                             >
+
+                    <p:ajax event="rowSelect" update="formCadPropriedade" oncomplete="dlg.hide()" /> 
+
+                    <p:column headerText="Nome">
+                        #{pro.nome}
+                    </p:column>
+
+                </p:dataTable>
+
+                <h:outputText value="Você não tem PROPRIEDADES cadastradas, realize o cadastrado dela." 
+                              rendered="#{propriedadeMB.listaPropri.size() == 0}"/>
+            </p:dialog>
+
+        </h:form>
+
+        <br/>
+
+    </ui:define>
+
+</ui:composition>
+

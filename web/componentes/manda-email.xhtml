@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">
+        Reportar Erro
+    </ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="formEmail">
+            <p:outputPanel id="outputPanelMail">
+                <h:form>
+                    <p:panel header="Envio de e-mail" style="width: 750px">
+                        <p:messages/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Seu email:"/>
+                            <h:inputText value="#{emailMB.mensagem.remetente}" size="66"/>
+                            <h:outputText value="Título: "/>
+                            <h:inputText value="#{emailMB.mensagem.titulo}" size="66"/>
+                            <h:outputText value="Mensagem: "/>
+                            <p:editor value="#{emailMB.mensagem.mensagem}" width="600"/> 
+                        </h:panelGrid>
+                        <p:commandButton value="Enviar e-mail" image="ui-icon-mail-closed" action="#{emailMB.enviaEmail()}" update="outputPanelMail"/>
+                        <p:commandButton value="Limpar campos" image="ui-icon-circle-close" action="#{emailMB.limpaCampos()}" update="outputPanelMail"/>
+                    </p:panel>
+                </h:form>
+            </p:outputPanel>
+        </h:form>    
+    </ui:define>
+
+</ui:composition>
+

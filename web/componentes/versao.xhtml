@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">Versão</ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:fieldset legend="Versão do BOVINI">
+            <div align="center">
+                <h2 style="color: #D20005; font-size: large">Versão 1.0.0 - Versão de Apresentação</h2>
+                
+                <h4 style="color: #D20005; font-size: small">Última atualização: 30/11/2011 - Jean Matheus Souto</h4>
+                
+            </div>
+        </p:fieldset>
+    </ui:define>
+</ui:composition>
+

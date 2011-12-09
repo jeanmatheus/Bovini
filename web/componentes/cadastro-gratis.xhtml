@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="content">
+        <div>
+            <div>                
+                <!-- CONTEUDO PRINCIPAL -->
+                <div id="contentIndex" class="right_contentIndex">
+                    <h:form id="formNovoUsuario">
+
+                        <p:messages id="msgs" showDetail="true"/> 
+
+                        <p:panel id="panelNovoUsuario" header="Bem Vindo" footer="Cloud Computing na Bovinocultura">
+
+                            <h:panelGrid id="grid" columns="3" cellspacing="5">                                
+
+                                <h:outputLabel value="Nome Completo:*"/>
+                                <p:inputText  id="nome" value="#{pessoaMB.pessoaSelecionada.nome}" 
+                                              required="true"
+                                              requiredMessage="O campo Nome é OBRIGATÓRIO."/>
+                                <p:message for="nome"/>
+
+                                <h:outputLabel value="Email:*"/>
+                                <p:inputText id="email" value="#{pessoaMB.pessoaSelecionada.email}" 
+                                             required="true"
+                                             requiredMessage="O campo Email é OBRIGATÓRIO."/>
+                                <p:message for="email"/>
+
+                                <h:outputText value="Senha:*"/>
+                                <p:password value="#{pessoaMB.senha1}"
+                                            id="senha1"
+                                            promptLabel="Senha Curta"
+                                            weakLabel="Senha Fraca"
+                                            goodLabel="Senha Boa"
+                                            strongLabel="Senha Forte"
+                                            feedback="true"
+                                            minLength="4"
+                                            maxlength="10"
+                                            required="true"
+                                            requiredMessage="O campo Senha é OBRIGATÓRIO."/> 
+                                <p:message for="senha1"/>
+
+                                <h:outputText value="Senha Novamente:*"/>
+                                <p:password value="#{pessoaMB.senha2}"
+                                            id="senha2"
+                                            promptLabel="Senha Curta"
+                                            weakLabel="Senha Fraca"
+                                            goodLabel="Senha Boa"
+                                            strongLabel="Senha Forte"
+                                            feedback="true"
+                                            minLength="4"
+                                            maxlength="10"
+                                            required="true"
+                                            requiredMessage="O campo Senha Novamente é OBRIGATÓRIO."/>
+                                <p:message for="senha2"/>
+
+                            </h:panelGrid>
+
+                            <h:outputText value="Você não é um robô?"/>
+                            <h:panelGrid columns="2" cellspacing="3">
+                                <p:captcha id="captcha" label="Você não é um robô?"
+                                           requiredMessage="O texto do captcha é obrigatório."
+                                           validatorMessage="O texto digitado está incorreto."
+                                           theme="clean"/>
+                                <p:message for="captcha"/>
+                            </h:panelGrid>
+
+                            <p:fieldset legend="Ações" style="text-align: right">
+                                <div id="divAcoesCadastroGratis" align="center">
+                                    <p:commandButton value="Efetivar Cadastro" 
+                                                     action="#{pessoaMB.salvar()}"
+                                                     update="grid,msgs"
+                                                     ajax="false"/>
+                                </div>
+                            </p:fieldset>
+
+
+                        </p:panel>
+                    </h:form>
+
+                </div>
+
+                <div align="right">
+
+                    <a href="./../xhtml/index.xhtml"  onclick="#{pessoaMB.logout()}">Voltar para Página Inicial</a>
+
+                </div>
+
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

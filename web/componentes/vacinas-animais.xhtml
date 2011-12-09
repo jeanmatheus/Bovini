@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">Vacinas</ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+
+
+    <ui:define name="content">
+        <div align="center" >
+            <h:form id="formVacina">
+
+                <!-- MENSAGENS -->
+                <p:messages id="msgs" showDetail="true"/>
+
+                <br/>
+                <p:fieldset legend="Vacinar animais">
+                    <!-- PESQUISAR ANIMAIS -->
+                    <div align="right">
+                        <h:outputLink value="javascript:void(0)" onclick="dlg.show()">Pesquisar</h:outputLink>  
+                    </div>
+
+                    <br/>
+                    
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Vacinar o ANIMAL:"/>
+                        <h:outputText value="#{vacinaMB.vacinaSelecionado.animal.nome.toUpperCase()}" style="color: #D20005; font-size: 14px"/>
+                    </h:panelGrid>
+
+                    <br/>
+                    
+                    <p:panel header="Vacinar">
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome:"/>
+                            <p:inputText value="#{vacinaMB.vacinaSelecionado.nome}"
+                                         required="true"
+                                         requiredMessage="O nome da vacina é OBRIGATÓRIO"/>
+                            
+                            <h:outputText value="Número da Dose:"/>
+                            <p:inputText value="#{vacinaMB.vacinaSelecionado.numeroDose}" 
+                                         required="true"
+                                         requiredMessage="O numero da dose é OBRIGATORIO"/>
+                            
+                            <h:outputText value="Data da Vacinação"/>
+                            <p:calendar value="#{vacinaMB.vacinaSelecionado.dataVacinacao}"
+                                        required="true"
+                                        requiredMessage="A data de vacinação é OBRIGATÓRIO"/>
+                            
+                            <h:outputText value="Validade em MESES: Ex.: 09"/>
+                            <p:inputText value="#{vacinaMB.validadeMeses}" required="true"
+                                         requiredMessage="A validade em MESES é OBRIGATÓRIO"/>
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <br/>
+                    <p:panel>
+                        <!-- SALVAR -->
+                        <p:commandButton value="Salvar" actionListener="#{vacinaMB.salvar()}" style="width: 100px; height: 50px; background-color: skyblue"
+                                         update="listaVacinas" 
+                                         ajax="false"
+                                         oncomplete="#{vacinaMB.listaVacinaPorAnimal}"/>
+                        
+                    </p:panel>
+
+                </p:fieldset>   
+            </h:form>
+
+            <br/>
+
+            <!-- LISTA DE VACINAS POR ANIMAL -->
+            <div>
+                <h:form id="listaVacinas" >
+                    <p:dataTable value="#{vacinaMB.listaVacinaPorAnimal}" var="vaciAni" >
+                    
+                        <f:facet name="header">
+                            Vacinas Por Animal
+                        </f:facet>
+                        
+                        <p:column headerText="Nº Controle">
+                            #{vaciAni.animal.numeroControle}
+                        </p:column>
+
+                        <p:column headerText="Nome Animal">
+                            #{vaciAni.animal.nome}
+                        </p:column>
+                        
+                        <p:column headerText="Numero Dose">
+                            #{vaciAni.numeroDose}
+                        </p:column>
+
+                        <p:column headerText="Validade">
+                            #{vaciAni.validade}
+                        </p:column>
+                        
+                    </p:dataTable>
+                </h:form>
+            </div>
+
+            <br/>
+
+            <!-- PESQUISAR ANIMAL -->
+            <h:form>
+
+                <p:dialog id="pesquisar" widgetVar="dlg" header="Pesquisar Animais Cadastradas" width="600" height="400"  
+                          resizable="true" showEffect="explode" hideEffect="explode">
+
+
+                    <p:dataTable value="#{animailMB.listaAnimais}" var="animal"
+                                 selectionMode="single"
+                                 selection="#{vacinaMB.vacinaSelecionado.animal}"
+                                 rowKey="#{animal.nome}"
+                                 >
+
+                        <p:ajax event="rowSelect" update="formVacina,listaVacinas" oncomplete="dlg.hide()" /> 
+
+                        <p:column headerText="Nº Controle" sortBy="#{animal.numeroControle}" filterBy="#{animal.numeroControle}">
+                            #{animal.numeroControle}
+                        </p:column>
+
+                        <p:column headerText="SISBOV" sortBy="#{animal.sisbov}" filterBy="#{animal.sisbov}">
+                            #{animal.sisbov}
+                        </p:column>
+
+                        <p:column headerText="Nome" sortBy="#{animal.nome}" filterBy="#{animal.nome}">
+                            #{animal.nome}
+                        </p:column>
+
+                        <p:column headerText="Raça" sortBy="#{animal.raca}" filterBy="#{animal.raca}">
+                            #{animal.raca}
+                        </p:column>
+
+                    </p:dataTable>                  
+                </p:dialog>
+
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

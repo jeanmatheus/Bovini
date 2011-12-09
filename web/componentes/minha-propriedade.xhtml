@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">Minha Propriedade</ui:define>
+
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="formMinhaProp">
+
+            <p:messages id="msgsProp" showDetail="true"/>
+
+            <p:fieldset legend="Propriedade">
+
+                <h:panelGrid columns="3" cellspacing="4">
+                    <h:outputText value="Propriedade: *"/>
+
+                    <p:selectOneMenu value="#{propriedadeMB.propriedadeSelecionado}" 
+                                     converter="PropriedadeConverter"
+                                     style="width: 200px">
+                        <p:ajax update="dlg,panelPro,formMinhaProp" oncomplete="proDialog.show()" />
+
+                        <f:selectItems value="#{propriedadeMB.listaPropri}"
+                                       var="pro"
+                                       itemLabel="#{pro.nome}"
+                                       itemValue="#{pro}">
+
+                        </f:selectItems>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </p:fieldset>
+        </h:form>
+
+        <br/>
+
+        <h:form id="dlg">
+            <!-- caixa de dialogo -->
+            <p:dialog id="dlgPro" header="Propriedades" widgetVar="proDialog" resizable="false"  
+                      width="300" showEffect="explode" hideEffect="explode"  rendered="#{propriedadeMB.propriedadeSelecionado != null}">  
+
+                <h:panelGrid id="display" columns="2" cellpadding="4">  
+
+                    <f:facet name="header">  
+                        <h:outputLabel value="#{propriedadeMB.propriedadeSelecionado.nome}"/> 
+                    </f:facet>
+
+                    <h:outputText value="ID:" />  
+                    <h:outputText value="#{propriedadeMB.propriedadeSelecionado.id}"/>
+
+                    <h:outputText value="Data Cadastro:" />  
+                    <h:outputText value="#{propriedadeMB.propriedadeSelecionado.dataCadastro}" />
+
+                    <h:outputText value="Cidade"/>
+                    <h:outputText value="#{propriedadeMB.propriedadeSelecionado.cidadeAux}"/>
+
+                    <h:outputText value="Estado"/>
+                    <h:outputText value="#{propriedadeMB.propriedadeSelecionado.estadoAux}"/>
+
+                    <h:outputText value="Complemento (RUA)"/>
+                    <h:outputText value="#{propriedadeMB.propriedadeSelecionado.complemento}"/>
+
+                    <h:outputText value="Bloco Produtor"/>
+                    <h:outputText value="#{propriedadeMB.propriedadeSelecionado.blocoProdutor}"/>
+                    
+                    <h:outputText value="Quantidade de Animais Cadastrados: "/>
+                    <h:outputText value="#{animailMB.listaAnimais.size()}"/>
+
+                </h:panelGrid>  
+
+                <p:commandButton value="Remover" action="#{propriedadeMB.remover()}" ajax="false" immediate="true" update="msgsProp"/>
+            </p:dialog> 
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+

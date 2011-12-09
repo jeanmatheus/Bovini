@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina"> Controle Reprodutivo</ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="formCiclo">
+
+            <!-- MENSAGENS -->
+            <p:messages id="msgs" showDetail="true"/>
+
+            <br/>
+            <p:fieldset legend="Ciclo reprodutivo animais">
+                <!-- PESQUISAR ANIMAIS -->
+                <div align="right">
+                    <h:outputLink value="javascript:void(0)" onclick="dlg.show()">Pesquisar</h:outputLink>  
+                </div>
+
+                <h:panelGrid columns="2">
+                    <h:outputText value="Ciclo reprodutivo do ANIMAL:"/>
+                    <h:outputText value="#{cicloReprodutivoMB.cicloReproSelecionado.animal.nome.toUpperCase()}" style="color: #D20005; font-size: 14px"/>
+                </h:panelGrid>
+
+                <br/>
+                
+                <p:panel header="Ciclo Reprodutivo">
+                    <h:panelGrid columns="2" cellspacing="5">
+                        <h:outputText value="Status do Ciclo: " />  
+                        <p:selectOneRadio value="#{cicloReprodutivoMB.cicloReproSelecionado.ciclo}">  
+                            <f:selectItem itemLabel="Inseminado" itemValue="Inseminado" />  
+                            <f:selectItem itemLabel="Agendado" itemValue="Agendado" />  
+                            <f:selectItem itemLabel="Nenhum" itemValue="Nenhum" />  
+                        </p:selectOneRadio> 
+                        
+                        <h:outputText value="Data da Inseminação:"/>
+                        <p:calendar value="#{cicloReprodutivoMB.cicloReproSelecionado.dataInseminacao}"/>
+                        
+                        <h:outputText value="Nº de partos"/>
+                        <p:inputText value="#{cicloReprodutivoMB.cicloReproSelecionado.numeroParto}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <br/>
+                
+                <p:panel>
+                    <!-- SALVAR -->
+                    <p:commandButton value="Salvar" action="#{cicloReprodutivoMB.salvar()}" style="width: 100px; height: 50px; background-color: skyblue"
+                                     update="listaCiclos" 
+                                     ajax="false"
+                                     oncomplete="#{cicloReprodutivoMB.listaAnimaisCicloReprodutivo}"/>
+
+                </p:panel>
+
+            </p:fieldset>   
+        </h:form>
+
+        <br/>
+        <!-- LISTA DE VACINAS POR ANIMAL -->
+        <div>
+            <h:form id="listaCiclos" >
+                <p:dataTable value="#{cicloReprodutivoMB.listaAnimaisCicloReprodutivo}" var="cicloAni" >
+
+                    <f:facet name="header">
+                        Vacinas Por Animal
+                    </f:facet>
+
+                    <p:column headerText="Nº Controle">
+                        #{cicloAni.animal.numeroControle}
+                    </p:column>
+
+                    <p:column headerText="Nome Animal">
+                        #{cicloAni.animal.nome}
+                    </p:column>
+
+                    <p:column headerText="Numero Parto">
+                        #{cicloAni.numeroParto}
+                    </p:column>
+
+                    <p:column headerText="Data Inseminação">
+                        #{cicloAni.dataInseminacao}
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+
+        <br/>
+
+        <!-- PESQUISAR ANIMAL -->
+        <h:form>
+
+            <p:dialog id="pesquisar" widgetVar="dlg" header="Pesquisar Animais Cadastradas" width="600" height="400"  
+                      resizable="true" showEffect="explode" hideEffect="explode">
+
+
+                <p:dataTable value="#{animailMB.listaAnimais}" var="animal"
+                             selectionMode="single"
+                             selection="#{cicloReprodutivoMB.cicloReproSelecionado.animal}"
+                             rowKey="#{animal.nome}"
+                             >
+
+                    <p:ajax event="rowSelect" update="formCiclo,listaCiclos" oncomplete="dlg.hide()" /> 
+
+                    <p:column headerText="Nº Controle" sortBy="#{animal.numeroControle}" filterBy="#{animal.numeroControle}">
+                        #{animal.numeroControle}
+                    </p:column>
+
+                    <p:column headerText="SISBOV" sortBy="#{animal.sisbov}" filterBy="#{animal.sisbov}">
+                        #{animal.sisbov}
+                    </p:column>
+
+                    <p:column headerText="Nome" sortBy="#{animal.nome}" filterBy="#{animal.nome}">
+                        #{animal.nome}
+                    </p:column>
+
+                    <p:column headerText="Raça" sortBy="#{animal.raca}" filterBy="#{animal.raca}">
+                        #{animal.raca}
+                    </p:column>
+
+                </p:dataTable>                  
+            </p:dialog>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

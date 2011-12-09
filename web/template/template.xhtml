@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./../resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="./images/favicon.ico" />
+
+        <!-- SCRIPT SALVE A WEB - GLOBO.COM -->
+        <script type="text/javascript" src="http://sawpf.com/1.0.js"></script>
+
+        <title><ui:insert name="tituloPagina">Bovini</ui:insert></title>
+
+        <!-- script google analitics -->
+        <script type="text/javascript">
+
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-27183713-1']);
+                _gaq.push(['_trackPageview']);
+
+                (function() {
+                     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+
+        </script>
+    </h:head>
+
+
+    <h:body>
+
+        <!-- TOPO -->
+        <div id="top">
+            <ui:insert name="top">
+                <ui:include src="/componentes/top.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <!-- MENU -->
+        <div id="menu">
+            <h:form id="formMenu">
+                <ui:insert name="menuUI"></ui:insert>
+            </h:form>
+        </div>
+
+        <div>
+            <div>
+                <!-- CONTEUDO PRINCIPAL -->
+                <div id="content" class="right_content" align="center">
+                    <ui:insert name="content">Content</ui:insert>
+                    <p:panel>
+                        <div align="center">
+                            <h3>Copyright 2011 - Software Acadêmico - UNOESC - Xanxerê</h3>
+                        </div>
+                    </p:panel>
+                </div>
+
+            </div>
+        </div>
+
+    </h:body>
+
+</html>

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">
+        TABELA
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form>
+
+            <p:dataTable var="pessoas" value="#{pessoaMB.listaPessoas}" rowKey="#{pessoas.nome}" paginator="true" rows="10"  
+                         selection="#{pessoaMB.pessoaSelecionada}" selectionMode="single">  
+
+                <p:ajax event="rowSelect" update=":form:display" oncomplete="pessoaDialog.show()" />  
+
+                <f:facet name="header">  
+                    Lista de Pessoas Cadastradas 
+                </f:facet> 
+                
+                <p:column headerText="ID" sortBy="#{pessoas.id}" filterBy="#{pessoas.id}">  
+                    #{pessoas.id}
+                </p:column>  
+
+                <p:column headerText="Data Cadastro" sortBy="#{pessoas.dataCadastro}" filterBy="#{pessoas.dataCadastro}">  
+                    #{pessoas.dataCadastro}
+                </p:column>  
+
+                <p:column headerText="Email" sortBy="#{pessoas.email}" filterBy="#{pessoas.email}">  
+                    #{pessoas.email} 
+                </p:column>  
+
+                <p:column headerText="Propriedade" sortBy="#{pessoas.propriedade.nome}" filterBy="#{pessoas.propriedade.nome}">  
+                    #{pessoas.propriedade.nome}
+                </p:column>  
+
+            </p:dataTable> 
+
+            <!-- caixa de dialogo -->
+            <p:dialog header="Usuário" widgetVar="pessoaDialog" resizable="false"  
+                      width="300" showEffect="explode" hideEffect="explode">  
+
+                <h:panelGrid id="display" columns="2" cellpadding="4">  
+
+                    <f:facet name="header">  
+                        <h:outputLabel value="#{pessoaMB.pessoaSelecionada.nome}"/> 
+                    </f:facet>
+                    
+                    <h:outputText value="ID:" />  
+                    <h:outputText value="#{pessoaMB.pessoaSelecionada.id}"/>
+
+                    <h:outputText value="Data Cadastro:" />  
+                    <h:outputText value="#{pessoaMB.pessoaSelecionada.dataCadastro}" />  
+
+                    <h:outputText value="Email:" />  
+                    <h:outputText value="#{pessoaMB.pessoaSelecionada.email}" />  
+
+                    <h:outputText value="Propriedade:" />  
+                    <h:outputText value="#{pessoaMB.pessoaSelecionada.propriedade.nome}" />  
+                    
+                </h:panelGrid>  
+            </p:dialog>  
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

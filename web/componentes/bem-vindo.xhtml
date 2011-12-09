@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">
+        Bem Vindo
+    </ui:define>
+
+    <ui:define name="menuUI">
+        <ui:include src="menubar.xhtml"/>
+    </ui:define>
+
+    <div id="logout">
+        <h:form>
+            <p:commandLink value="Logout" actionListener="/xhtml/index.xhtml"/>
+        </h:form>
+    </div>
+
+    <ui:define name="content">
+        <h:form id="formBemvindo" style="text-align: center">
+
+
+            <div align="center">
+                <h:panelGrid columns="2" cellspacing="10">
+
+                    <p:panel header="Animais">
+                        <!-- animais no periodo seco -->
+                        <p:dataTable id="tblTodos" var="animalSeco" value="#{animailMB.listaAnimais}" paginator="true" rows="5">
+                            <p:column>
+                                <f:facet name="header">
+                                    Nome
+                                </f:facet>
+                                <h:outputText value="#{animalSeco.nome}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Nº SISBOV
+                                </f:facet>
+                                <h:outputText value="#{animalSeco.sisbov}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Categoria
+                                </f:facet>
+                                <h:outputText value="#{animalSeco.categoria}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Propriedade
+                                </f:facet>
+                                <h:outputText value="#{animalSeco.propriedade}" converter="PropriedadeConverter"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Status
+                                </f:facet>
+                                <h:outputText value="#{animalSeco.status}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Nº Controle
+                                </f:facet>
+                                <h:outputText value="#{animalSeco.numeroControle}"/>                                                 
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:panel>
+
+                    <p:panel header="Animais com ciclo Reprodutivo">
+                        <!-- animais final gestação -->
+                        <p:dataTable id="tblCiclo" var="animalCiclo" value="#{cicloReprodutivoMB.listaAnimaisCicloReprodutivo}" 
+                                     paginator="true" rows="5">
+                            <p:column>
+                                <f:facet name="header">
+                                    Nome
+                                </f:facet>
+                                <h:outputText value="#{animalCiclo.ciclo}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Nº Controle
+                                </f:facet>
+                                <h:outputText value="#{animalCiclo.animal.numeroControle}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Nº Parto
+                                </f:facet>
+                                <h:outputText value="#{animalCiclo.numeroParto}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Data Inseminação
+                                </f:facet>
+                                <h:outputText value="#{animalCiclo.dataInseminacao}"/>                                                 
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+
+                    <p:panel header="Agenda de Vacinas">
+                        <!-- VACINAS -->
+                        <p:dataTable var="animalVacina" value="#{vacinaMB.listaTodosAnimaisVacinados}" paginator="true" rows="5">
+                            <p:column>
+                                <f:facet name="header">
+                                    Nome Vacina
+                                </f:facet>
+                                <h:outputText value="#{animalVacina.nome}"/>                                                 
+                            </p:column>
+
+                            <p:column style="width: 60px">
+                                <f:facet name="header">
+                                    Nº Controle
+                                </f:facet>
+                                <h:outputText value="#{animalVacina.animal.numeroControle}"/>                                                 
+                            </p:column>
+                            <!--
+                            <p:column>
+                                <f:facet name="header">
+                                   Nome Animal
+                                </f:facet>
+                                <h:outputText value="#{animalVacina.animal.nome}"/>                                                 
+                            </p:column>
+                            -->
+                            <p:column>
+                                <f:facet name="header">
+                                    Data Vacinação
+                                </f:facet>
+                                <h:outputText value="#{animalVacina.dataVacinacao}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Validade
+                                </f:facet>
+                                <h:outputText value="#{animalVacina.validade}" converter="PropriedadeConverter"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Nº Dose
+                                </f:facet>
+                                <h:outputText value="#{animalVacina.numeroDose}"/>                                                 
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:panel>
+
+                    <p:panel header="Desvermificação">
+                        <!-- Desverminação -->
+                        <p:dataTable var="animalDes" value="#{desvermificacaoMB.listaAnimaisDesverminados}" paginator="true" rows="5">
+                            <p:column>
+                                <f:facet name="header">
+                                    Desverminação
+                                </f:facet>
+                                <h:outputText value="#{animalDes.nome}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Nº Controle
+                                </f:facet>
+                                <h:outputText value="#{animalDes.validadeDes}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Categoria
+                                </f:facet>
+                                <h:outputText value="#{animalDes.animal.categoria}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Data Desverminação
+                                </f:facet>
+                                <h:outputText value="#{animalDes.dataDesvermificacao}"/>                                                 
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    Validade
+                                </f:facet>
+                                <h:outputText value="#{animalDes.validadeDes}"/>                                                 
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+            </div>
+
+            <br></br>
+            <br></br>
+
+            <div id="usuario">
+                <h:form id="formLogoutUsuario">
+                    <div align="right"> 
+                        <a href="./../xhtml/index.xhtml"  onclick="#{pessoaMB.logout()}">Logout</a>
+                    </div>
+                </h:form>
+            </div>
+
+            <br></br>
+            <br></br>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
