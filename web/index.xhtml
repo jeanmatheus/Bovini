@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="tituloPagina">
+        Bovini - Cloud
+    </ui:define>
+
+
+    <ui:define name="menu">
+        Cadastre-se
+    </ui:define>
+
+    <ui:define name="content">
+        <div>
+            <div>                
+                <!-- CONTEUDO PRINCIPAL -->
+                <div id="content" class="right_content">
+
+                    <h:form >
+                        <p:fieldset legend="Bem vindo" style="height: 300px">
+                            <div align="center">
+                                <h:panelGrid columns="2" cellspacing="15">
+
+                                    <p:panel header="Bovini - Os Bois na Nuvem" footer="Cloud Computing" style="width: 350px; height: 250px">  
+                                        <h3>O bovini está oferencendo a você um serviço<br/>
+                                            cloud computing, com a finalidade de facilitar <br/>
+                                            e tornar toda as informaçoes de sua propriedade <br/>
+                                            disponivela você em qualquer lugar do mundo, <br/>
+                                            em qualquer computador a qualquer hora...<br/>
+                                        </h3>
+                                    </p:panel>  
+
+                                    
+                                    
+                                    <p:panel header="O Bovini" footer="Facilitando sua vida!!" style="width: 350px; height: 250px">  
+                                        <h3>O bovini está oferencendo a você um serviço <br/>
+                                            para o gerenciamento de sua propriedade de  <br/>
+                                            bovinocultura, com no manejo e sanidade dos <br/>
+                                            animais de sua propriedade. Oferecemoas de  <br/>
+                                            a possibilidade de você gerenciar todas as  <br/>
+                                            suas propriedades, sem nenhuma limitação de <br/>
+                                            de quantidade de animais, e tambem oferecemos<br/>
+                                            total controle do histórico de cada animal que<br/>
+                                            que esteja cadastrado no BOVINI.<br/>
+                                        </h3>
+                                    </p:panel>  
+                                </h:panelGrid>
+                            </div>
+                        </p:fieldset>
+
+                        <div>
+                            <br>
+                                
+                            </br>
+
+                            <p:messages id="mensa" showDetail="true"/>
+
+                            <p:fieldset legend="Faça parte você também" style="height: 200px">  
+                                <h:form>
+                                    <h:panelGrid columns="2" cellspacing="5">
+
+                                        <p:fieldset legend="Crie agora sua conta"  style="background-color: #E0EEE0; width: 300px; height: 120px">
+                                            <div align="center">
+                                                <h:outputLink id="cadGratis" value="./../xhtml/componentes/cadastro-gratis.xhtml">     
+                                                    <p:graphicImage value="./images/botao-cadastre-se.png" />  
+                                                </h:outputLink>
+                                            </div>
+                                        </p:fieldset>
+
+
+                                        <p:fieldset legend="LOGIN" style="background-color: #E0EEE0; width: 300px; height: 120px">
+                                            <h:form>
+
+                                                <h:panelGrid columns="2">
+
+                                                    <h:outputText value="Nome: *"/>
+                                                    <p:inputText id="inputNome" value="#{pessoaMB.userLogin}" 
+                                                                 required="true" requiredMessage="O campo nome é OBRIGATÓRIO"/>
+
+                                                    <h:outputText value="Senha: *"/>
+                                                    <p:password id="inputSenha" value="#{pessoaMB.senhaLogin}" 
+                                                                required="true" 
+                                                                requiredMessage="O campo senha é OBRIGATÓRIO"
+                                                                feedback="false"/>
+
+                                                    <div align="right">
+                                                        <p:commandButton value="LOGAR" ajax="false" 
+                                                                         action="#{pessoaMB.logar()}" 
+                                                                         update="mensa"
+                                                                         style="background-color: cadetblue"/>
+                                                    </div>
+                                                </h:panelGrid>
+                                            </h:form>
+                                        </p:fieldset>
+
+                                    </h:panelGrid>
+                                </h:form>
+                            </p:fieldset>
+                        </div>
+
+                    </h:form>
+                    <br/>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="color: #ffffff" align="center">
+            <p:panel>
+                <p:graphicImage value="./../images/logos.png"/>
+            </p:panel>
+        </div>
+        <br></br>
+
+    </ui:define>
+
+</ui:composition>
