@@ -10,4 +10,7 @@ package br.com.jean.faculdade.projeto.controller;
  */
 public class EnderecoController {
     
+    /**
+     * Aqui vamos implementar as regras que o Endereco eh responsávbel
+     */
 }
