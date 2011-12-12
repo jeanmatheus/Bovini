@@ -12,9 +12,9 @@ import org.junit.Test;
  * @author jeanmatheus
  */
 public class JPAUtilTest {
-   
+
     @Test
-    public void getEmTest(){
+    public void getEmTest() {
         JPAUtil.getEm();
     }
 }
