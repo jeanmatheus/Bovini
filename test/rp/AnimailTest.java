@@ -4,14 +4,15 @@
  */
 package rp;
 
+
 import br.com.jean.faculdade.projeto.model.Animal;
 import br.com.jean.faculdade.projeto.model.Vacina;
 import br.com.jean.faculdade.projeto.repositorio.AnimalRP;
 import br.com.jean.faculdade.projeto.repositorio.VacinaRP;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -37,8 +38,10 @@ public class AnimailTest {
             
             
             rp.salvar(a);
-            
+        
+            Assert.assertNotNull(a);
         }
+        
     }
     
     
