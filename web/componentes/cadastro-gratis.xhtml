@@ -72,15 +72,12 @@
                                 <p:message for="captcha"/>
                             </h:panelGrid>
 
-                            <p:fieldset legend="Ações" style="text-align: right">
-                                <div id="divAcoesCadastroGratis" align="center">
-                                    <p:commandButton value="Efetivar Cadastro" 
-                                                     action="#{pessoaMB.salvar()}"
-                                                     update="grid,msgs"
-                                                     ajax="false"/>
-                                </div>
-                            </p:fieldset>
-
+                            <div id="divAcoesCadastroGratis" align="center">
+                                <p:commandButton value="Efetivar Cadastro" 
+                                                 action="#{pessoaMB.salvar()}"
+                                                 update="grid,msgs"
+                                                 ajax="false"/>
+                            </div>
 
                         </p:panel>
                     </h:form>
@@ -89,7 +86,7 @@
                 <div align="right">
                     <a href="./../xhtml/index.xhtml"  onclick="#{pessoaMB.logout()}"><h3>Voltar para Página Inicial</h3></a>
                 </div>
-                
+
             </div>
         </div>
 
