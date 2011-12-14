@@ -1,5 +1,3 @@
-
-
 #menu{
     position: relative;
     background-color: #ffffff;
@@ -9,7 +7,7 @@
 }
 
 div.rodape{
-    background-image: url(../../images/rodapeF.png);
+    background-image: url(../../images/rodapeV.png);
     text-align: center;
     position:absolute;
     bottom:0px;
@@ -21,9 +19,9 @@ div.rodape{
 }
 
 div.topo{
-    background-image: url(../../images/superior.png);
+    background-image: url(../../images/superiorV.png);
     width: auto;
-    height: 150px;
+    height: 100px;
     text-align: center;
 }
 
@@ -36,7 +34,6 @@ div.topo{
     text-align:right;
     padding: 5px;
     margin: 10px 0px 0px 0px;
-
 }
 
 #left {
@@ -60,7 +57,7 @@ div.topo{
 }
 
 .right_content {
-    background-color: #E0EEE0;
+    background-color: #ffffff;
     padding: 5px;
     margin: 0px 50px 0px 50px;
 }
