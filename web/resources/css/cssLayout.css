@@ -15,6 +15,17 @@
     margin: 0px 0px 10px 0px;
 }
 
+div.rodape{
+    background-image: url(../../images/rodapeF.png);
+    width: auto;
+    height: 200px;
+    text-align: center;
+}
+
+div.rodape.texto{
+    color: #ffffff;
+}
+
 
 #bottom{
     position: absolute;
@@ -25,6 +36,7 @@
     text-align:right;
     padding: 5px;
     margin: 10px 0px 0px 0px;
+    
 }
 
 #left {
