@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package rp;
 
 import br.com.jean.faculdade.projeto.model.Cidade;
@@ -21,10 +17,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author adml01
- */
 public class PessoaRPTest {
 
     Pessoa pessoa;
