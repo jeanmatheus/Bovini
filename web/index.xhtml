@@ -6,11 +6,9 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
-
     <ui:define name="tituloPagina">
         Bovini - Cloud
     </ui:define>
-
     <ui:define name="content">    
         <div>                
             <!-- CONTEUDO PRINCIPAL -->
@@ -24,32 +22,20 @@
                             ,para que seu colégio e seus alunos e professores possam utilizar.
                             <br/>
                             <p style="color: #000000">
-                            Entre em contato com nossa Equipe, e já faça parte do projeto agora, dando sua 
-                            opiniao, e ajundando com melhorias.</p>
+                                Entre em contato com nossa Equipe, e já faça parte do projeto agora, dando sua 
+                                opiniao, e ajundando com melhorias.</p>
                         </p>
                     </h3>
                     <a><h3>Contato</h3></a>
                 </p:fieldset>
-
                 <br/>
                 <br/>
-
+                
+                <!-- jean matheus teste repo online github-->
                 <h:form >
-                    <p:fieldset legend="Bem vindo" style="height: auto; width: 60%">
-                        <div align="center">
-                            <h:panelGrid columns="2" cellspacing="15">
-
-                                <p:panel header="Bovini - Os Bois na Nuvem" footer="Cloud Computing" style="width: 350px; height: 250px">  
-                                    <h3>O bovini está oferencendo a você um serviço<br/>
-                                        cloud computing, com a finalidade de facilitar <br/>
-                                        e tornar toda as informaçoes de sua propriedade <br/>
-                                        disponivela você em qualquer lugar do mundo, <br/>
-                                        em qualquer computador a qualquer hora...<br/>
-                                    </h3>
-                                </p:panel>  
-
-
-
+                    <div style="width: auto; height: 60%">
+                        <h:panelGrid columns="2" cellspacing="15">
+                            <h:panelGroup>
                                 <p:panel header="O Bovini" footer="Facilitando sua vida!!" style="width: 350px; height: 250px">  
                                     <h3>O bovini está oferencendo a você um serviço <br/>
                                         para o gerenciamento de sua propriedade de  <br/>
@@ -62,69 +48,50 @@
                                         que esteja cadastrado no BOVINI.<br/>
                                     </h3>
                                 </p:panel>  
-                            </h:panelGrid>
-                        </div>
-                    </p:fieldset>
-
-                    <div>
-                        <br>
-
-                        </br>
-
-                        <p:messages id="mensa" showDetail="true"/>
-
-                        <p:fieldset legend="Faça parte você também" style="height: auto; width: 60%">  
+                            </h:panelGroup>
                             <h:form>
-                                <h:panelGrid columns="2" cellspacing="5">
-
-                                    <p:fieldset legend="Crie agora sua conta"  style="background-color: #E0EEE0; width: 300px; height: 120px">
-                                        <div align="center">
-                                            <br/>
-                                            <h:outputLink id="cadGratis" value="./../xhtml/componentes/cadastro-gratis.xhtml">     
-                                                <h2><b>Cadastre-se á Versão Beta é GRÁTIS</b></h2>
-                                            </h:outputLink>
-                                        </div>
-                                    </p:fieldset>
-
-
-                                    <p:fieldset legend="LOGIN" style="background-color: #E0EEE0; width: 300px; height: auto">
-                                        <h:form>
-                                            <div id="divLogin" align="center">
-                                                <h:panelGrid columns="2">
-
-                                                    <h:outputText value="Nome: *"/>
-                                                    <p:inputText id="inputNome" value="#{pessoaMB.userLogin}" 
-                                                                 required="true" requiredMessage="O campo nome é OBRIGATÓRIO"/>
-
-                                                    <h:outputText value="Senha: *"/>
-                                                    <p:password id="inputSenha" value="#{pessoaMB.senhaLogin}" 
-                                                                required="true" 
-                                                                requiredMessage="O campo senha é OBRIGATÓRIO"
-                                                                feedback="false"/>
-
-                                                    <p:commandButton value="LOGAR" ajax="false" 
-                                                                     action="#{pessoaMB.logar()}" 
-                                                                     update="mensa"
-                                                                     style="background-color: cadetblue; width: 135px; height: 40px"/>
-
-                                                </h:panelGrid>
-                                            </div>
-                                        </h:form>
-                                    </p:fieldset>
-
-                                </h:panelGrid>
+                                <div style="width: 300px">
+                                    <h:panelGroup>
+                                        <h:panelGrid columns="1" cellspacing="5">
+                                            <p:fieldset legend="Crie agora sua conta"  style="background-color: #E0EEE0; width: 300px; height: 120px">
+                                                <div align="center">
+                                                    <br/>
+                                                    <h:outputLink id="cadGratis" value="./../xhtml/componentes/cadastro-gratis.xhtml">     
+                                                        <h2><b>Cadastre-se á Versão Beta é GRÁTIS</b></h2>
+                                                    </h:outputLink>
+                                                </div>
+                                            </p:fieldset>
+                                            <p:messages id="mensa" showDetail="true"/>
+                                            <p:fieldset legend="LOGIN" style="background-color: #E0EEE0; width: 300px; height: auto">
+                                                <h:form>
+                                                    <div id="divLogin" align="center">
+                                                        <h:panelGrid columns="2">
+                                                            <h:outputText value="Nome: *"/>
+                                                            <p:inputText id="inputNome" value="#{pessoaMB.userLogin}" 
+                                                                         required="true" requiredMessage="O campo nome é OBRIGATÓRIO"/>
+                                                            <h:outputText value="Senha: *"/>
+                                                            <p:password id="inputSenha" value="#{pessoaMB.senhaLogin}" 
+                                                                        required="true" 
+                                                                        requiredMessage="O campo senha é OBRIGATÓRIO"
+                                                                        feedback="false"/>
+                                                            <p:commandButton value="LOGAR" ajax="false" 
+                                                                             action="#{pessoaMB.logar()}" 
+                                                                             update="mensa"
+                                                                             style="background-color: cadetblue; width: 135px; height: 40px"/>
+                                                        </h:panelGrid>
+                                                    </div>
+                                                </h:form>
+                                            </p:fieldset>
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+                                </div>
                             </h:form>
-                        </p:fieldset>
+                        </h:panelGrid>
                     </div>
-
                 </h:form>
                 <br/>
             </div>
-
         </div>
-
         <br/>
-
     </ui:define>
-
 </ui:composition>
